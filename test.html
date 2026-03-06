@@ -1,0 +1,693 @@
+<h1>Theory</h1>
+Most of the chapters in the book will be divided into two big sections: a <strong>theory</strong> section that will include all of the material, and an <strong>activities</strong> section that will include a series of activities that you can undertake.
+<h2>Learning objectives</h2>
+In this chapter, our goal is to <strong>build the necessary vocabulary</strong>. Throughout the book, we will introduce notions and definitions: that said, some of the most basic definitions are provided in this first chapter. The learning objectives follow.
+<div class="textbox textbox--learning-objectives"><header class="textbox__header">
+<p class="textbox__title">Random experiments, sample spaces, and other notation</p>
+
+</header>
+<div class="textbox__content">
+
+After this chapter, you will be able to:
+<ul>
+ 	<li>
+<div><span style="font-size: 1em">give examples of experiments, sample spaces, and events.</span></div></li>
+ 	<li>explain sets and describe why they are used to describe sets.</li>
+ 	<li>use Venn diagrams to represent events.</li>
+ 	<li>understand and use basic set operations.</li>
+ 	<li>give examples of and recognize mutually exclusive events.</li>
+ 	<li>calculate the cardinality of an event/set.</li>
+</ul>
+</div>
+</div>
+<h2>Chapter questions</h2>
+<ol>
+ 	<li>What is a <strong>random experiment</strong>? What is a <strong>sample space</strong>? What is an <strong>event</strong>?</li>
+ 	<li>What is the <strong>cardinality</strong> of an event?</li>
+ 	<li><strong>Venn diagrams and set notation</strong>: can we use them for representing events and sample spaces?
+<ul>
+ 	<li>[latex]A \cup B[/latex]</li>
+ 	<li>[latex]A \cap B[/latex]</li>
+ 	<li>[latex]\overline{A}[/latex] (complement of A)</li>
+ 	<li>[latex]A\setminus B[/latex]</li>
+</ul>
+</li>
+ 	<li>What does it mean that two events are <strong>mutually exclusive</strong>?</li>
+ 	<li>What are some <strong>useful identities</strong> for set operations?</li>
+</ol>
+<h2>Motivating examples</h2>
+<h3>A game of Monopoly</h3>
+Is Monopoly a game of luck or strategy? Perhaps both? Imagine that it is your turn and your friends have built hotels <em>everywhere </em>on the board. As it is your turn, you are about to roll two dice and hope you get the sum of the two dice to be a 6 or a 7 to avoid paying your friends and declaring bankruptcy. Everyone expects you to lose! That said, what are the true "chances" you will roll a 6 or a 7, after considering all the scenarios?
+
+At the end of this first chapter, we should have all the necessary definitions in order to be able to quantify risks and chances, not only for Monopoly, but for all engineering applications.
+<h3>Let's play some cards</h3>
+Continuing with games, assume that you are playing a card game on a deck with 52 cards of 4 different suits: <span style="color: #ff0000">♥</span>, ♣, <span style="color: #ff0000">♦</span>, ♠. There are 13 cards of each suit, being ordered as: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 followed by three face cards noted as J, Q, K. The game is simple: <em>pick a card, any card</em>. If that card is red, you win; otherwise, you lose.
+
+Should we play? How should we play? Are there ways to again mathematically quantify our risks and our gains?
+<h2>Definitions</h2>
+<h3>Random experiments</h3>
+<div>A <strong>[pb_glossary id="37"]random experiment[/pb_glossary] </strong>is defined as an activity or situation where the outcome obtained may be different, even when executed the same way. This randomness in the outcome could be due to the inherent nature of the experiment, due to different levels of skill required to get a better result, or due to differences in instrumentation.</div>
+<div></div>
+<div>
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Examples of random experiments</p>
+
+</header>
+<div class="textbox__content">
+
+Random experiments are all around us.
+<ul>
+ 	<li>Flipping a coin is a random experiment, as its outcome can be heads or tails. One could even go further as to try to quantify the "chances" of getting one outcome versus another (as in, "50-50" using a fair coin).</li>
+ 	<li>Rolling a six-sided dice is a random experiment, with the outcome being any integer number between 1 and 6.</li>
+</ul>
+</div>
+</div>
+The difficulty in understanding whether a process truly constitutes a random experiment is that there is no objective measure. For example, measuring the air quality inside a home at a specific time sounds like it should be <em>deterministic </em>in nature: that is, there is a <em>true </em>value and we are measuring to find it. However, from a mathematical standpoint, we could say that this process is indeed a random experiment, as it can depend on the instruments used to measure it, the person measuring it, among others. In simple terms, if an outcome cannot be adequately guaranteed, then it can be viewed as a random experiment.
+<div class="textbox textbox--exercises"><header class="textbox__header">
+<p class="textbox__title">Are those random experiments?</p>
+
+</header>
+<div class="textbox__content">
+
+What are some other random experiments you can think of?
+<ul>
+ 	<li>Is the time when the next bus arrives at the bus stop a random experiment?</li>
+ 	<li>How about baking? Is the quality of your cake a random experiment?</li>
+ 	<li>Is a football game an experiment?</li>
+ 	<li>Finally, is measuring the width of a coffee table at a furniture store using a ruler a random experiment?</li>
+</ul>
+</div>
+</div>
+Before we move to the next section, let us return to our card game from the Motivating Examples. What do you think? Is our card game a random experiment? In essence, if you always follow the same strategy on different decks (e.g., pick the first card at the top, or pick the first card at the bottom of the deck), are you guaranteed the same result?
+
+</div>
+<h3>Sample spaces</h3>
+With the term <strong>[pb_glossary id="38"]sample space[/pb_glossary]</strong>, we refer to the set of all possible outcomes that can be obtained from a random experiment. If an outcome is not in the sample space of a random experiment, then that outcome cannot happen as a result of that random experiment. We typically reserve the notation [latex]S[/latex] as the sample space and we write [latex]S=\left\{outcomes\right\}[/latex].
+<div></div>
+<div>
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Examples of sample spaces</p>
+
+</header>
+<div class="textbox__content">
+
+Sample spaces of random experiments include:
+<ul>
+ 	<li>In a game of tic-tac-toe (random experiment), we can <em>win</em>, <em>lose</em>, or <em>tie</em>. Hence, [latex]S=\left\{\text{win, lose, tie}\right\}[/latex].
+<ul>
+ 	<li>At the end of a game of tic-tac-toe, these are the only allowed outcomes.</li>
+</ul>
+</li>
+ 	<li>In a graded course (random experiment), we can get an <em>A, A-, B+, B, B-, </em>...
+<ul>
+ 	<li>The sample space above does not include <em>A+</em>: this means that you cannot receive an <em>A+ </em>as your grade.</li>
+</ul>
+</li>
+ 	<li>The duration of a random tv show episode (random experiment), is any positive real number.
+<ul>
+ 	<li>You cannot watch a <em>negative amount of TV.</em></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+A sample space can have a finite or countably infinite number of possible outcomes (e.g., "1, 2, 3, 4, 5, or 6" or any integer number) or it can be an interval of real numbers (e.g., any number between 0 and 1, that is [latex]\left[0,1\right][/latex]). We call the first type of sample space <strong>discrete</strong>. We will focus on that type of sample spaces for now. The second type of sample space (where the outcome is a real number belonging to some interval) is called <strong>continuous</strong>. The rest of this chapter is devoted to discrete sample spaces.
+<div class="textbox textbox--exercises"><header class="textbox__header">
+<p class="textbox__title">Discussing sample spaces</p>
+
+</header>
+<div class="textbox__content">
+
+Sample spaces should include all possible outcomes for a random experiment.
+<ul>
+ 	<li>Is... food poisoning a possible outcome of cooking? What are the other outcomes in that random experiment of you cooking?</li>
+ 	<li>Is... snow a possible outcome for tomorrow's weather? What are the other outcomes in the random experiment of the weather tomorrow?</li>
+</ul>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">The sample space of Monopoly</p>
+
+</header>
+<div class="textbox__content">
+
+Assume again it is your turn to roll the dice for a round of Monopoly. What is the sample space for rolling two dice?
+
+Let [latex]\left(i,j\right)[/latex] represent the tuple of the first die ([latex]i[/latex]) and the second die ([latex]j[/latex]). Then, the sample space is:
+<ul>
+ 	<li>[latex]\left(1,1\right), \left(1,2\right), \left(1,3\right), \left(1,4\right), \left(1,5\right), \left(1,6\right)[/latex]</li>
+ 	<li>[latex]\left(2,1\right), \left(2,2\right), \left(2,3\right), \left(2,4\right), \left(2,5\right), \left(2,6\right)[/latex]</li>
+ 	<li>[latex]\left(3,1\right), \left(3,2\right), \left(3,3\right), \left(3,4\right), \left(3,5\right), \left(3,6\right)[/latex]</li>
+ 	<li>[latex]\left(4,1\right), \left(4,2\right), \left(4,3\right), \left(4,4\right), \left(4,5\right), \left(4,6\right)[/latex]</li>
+ 	<li>[latex]\left(5,1\right), \left(5,2\right), \left(5,3\right), \left(5,4\right), \left(5,5\right), \left(5,6\right)[/latex]</li>
+ 	<li>[latex]\left(6,1\right), \left(6,2\right), \left(6,3\right), \left(6,4\right), \left(6,5\right), \left(6,6\right)[/latex]</li>
+</ul>
+We can even write [latex]S=\left\{\left(i,j\right): i,j \in \mathbb{Z}, 1\leq i,j\leq 6\right\}[/latex], which basically states that the sample space is defined as all possible tuples of integer numbers between 1 and 6.
+
+This seems like it can get overly complicated fast. We will need a more efficient way to <em>count </em>outcomes soon.
+
+</div>
+</div>
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">The sample space of the <em>longest distance to a hospital</em></p>
+
+</header>
+<div class="textbox__content">
+
+Even if we will focus on discrete sample spaces for now, let us provide one example of a continuous sample space first. What is the sample space of the longest distance we are located from a hospital at a time?
+
+Let [latex]d[/latex] be the distance (as the crow flies) from a hospital at any time. Then we must have [latex]d&gt;0.[/latex] That said, we can perhaps improve on that. If we are in the United States, then the longest distance between any two points (not necessarily from or to a hospital) is 5,859 miles, so we can say that the distance from a hospital at any time has a sample space of a real number between  [latex]0[/latex] (at the hospital already) to [latex]5859[/latex]. Furthermore, assuming that we are only interested in the conterminous United States ("Lower 48" or the lower 48 states including Washington, D.C.) then that same sample space can now be written as a real number between [latex]0[/latex] and [latex]2892[/latex].
+
+</div>
+</div>
+&nbsp;
+
+</div>
+<div>
+<div class="textbox textbox--exercises"><header class="textbox__header">
+<p class="textbox__title">Some more sample spaces</p>
+
+</header>
+<div class="textbox__content">
+
+Give two examples of sample spaces.
+<ul>
+ 	<li>Provide the sample space of a random experiment with a finite number of possible outcomes.</li>
+ 	<li>Provide the sample space of a random experiment with outcomes defined over an interval of real numbers.</li>
+</ul>
+</div>
+</div>
+Once again, before we move to more definitions, let us think back to our card game. The number of outcomes is finite, that is for sure, so our sample space is discrete. But what is our sample space? As is the case with many random experiments, there are multiple ways to describe the sample space: [latex]S=\left\{1\textcolor{red}{\heartsuit}, 2\textcolor{red}{\heartsuit}, \ldots, K\textcolor{red}{\heartsuit}, 1\clubsuit, 2\clubsuit, \ldots, K\spadesuit\right\}[/latex] or [latex]S=\left\{red, black\right\}[/latex] or even [latex]S=\left\{\textcolor{red}{\heartsuit}, \clubsuit, \textcolor{red}{\diamondsuit}, \spadesuit\right\}[/latex].
+
+</div>
+<div></div>
+<div>The selection of the proper sample space is guided by what we are trying to achieve. In our motivation, we spoke about the color of the suit, so a sample space of [latex]S=\left\{red, black\right\}[/latex] seems like the simpler and better choice.</div>
+<h3>Events</h3>
+<div>The term <strong>[pb_glossary id="39"]event[/pb_glossary] </strong>is used to define a subset (collection) of outcomes from the sample space. It can include only one such outcome or it can contain many of the outcomes. An event can be a combination of outcomes, the negation of an outcome, or other logical relationship between outcomes. An event is called <em>simple </em>if only one outcome can satisfy it or <em>compound </em>if it requires multiple outcomes. Some examples to clarify these definitions follow.</div>
+</div>
+<div></div>
+<div>
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Examples of events</p>
+
+</header>
+<div class="textbox__content">
+
+Events are essentially collections of outcomes
+<ul>
+ 	<li>In a graded class (random experiment) with a sample space of [latex]S=\left\{A, A-, B+, B, B-, C+, C, C-, D+, D, F\right\}[/latex], then an event can be to <strong>pass the class </strong>or to <strong>get a B or higher</strong>.</li>
+ 	<li>When picking a single card from a deck of cards, then an event can be to <strong>pick a Queen (Q) </strong>or <strong>to pick a Queen of clubs (Q♣)</strong>. The first event is compound (there are four outcomes that can satisfy it as in Q♣, Q♠, Q♥, Q♦) whereas the second one is simple (only one outcome can satisfy it as in Q♣).</li>
+ 	<li>In tomorrow's weather (random experiment), an event can be <strong>no rain</strong>. This is the negation of the event/outcome rain, and it means any outcome in the sample space <strong>except for rain.</strong></li>
+</ul>
+</div>
+</div>
+Let us practice with a couple of exercises:
+<div class="textbox textbox--exercises"><header class="textbox__header">
+<p class="textbox__title">Event exercises</p>
+
+</header>
+<div class="textbox__content">
+
+Answer the following questions.
+<ul>
+ 	<li>Let [latex]T[/latex] be the time until the next bus arrives. Is [latex]T\leq 10 \text{ minutes}[/latex] a valid event?</li>
+ 	<li>Define an event for the temperature tomorrow.</li>
+ 	<li>In a board game where players roll two six-sided dice, is "getting a 10" a simple or a compound event? You may assume that the sample space is defined as [latex]S=\left\{\left(i,j\right): i,j \in \mathbb{Z}, 1\leq i,j\leq 6\right\}[/latex] (like we did earlier).</li>
+</ul>
+</div>
+</div>
+</div>
+<div>
+<div>We are almost there with our definitions! Before we move to the next section, we revisit our card game. Let [latex]E[/latex] be our event of "picking a red card." Assume that our sample space is defined as [latex]S=\left\{red, black\right\}[/latex]. Then, event [latex]E[/latex] is a <strong>simple event</strong> as there is only one outcome that satisfies it.</div>
+<div></div>
+<div>That said, let's say that the sample space was [latex]S=\left\{1\textcolor{red}{\heartsuit}, 2\textcolor{red}{\heartsuit}, \ldots, K\textcolor{red}{\heartsuit}, 1\clubsuit, 2\clubsuit, \ldots, K\spadesuit\right\}.[/latex] Then, the event [latex]E[/latex] is now a <strong>compound event</strong> as there are 26 outcomes that satisfy it. We can write that picking a red card corresponds to event [latex]E=\left\{1\textcolor{red}{\heartsuit}, 2\textcolor{red}{\heartsuit}, \ldots, K\textcolor{red}{\heartsuit}, 1\textcolor{red}{\diamondsuit}, \ldots, K\textcolor{red}{\diamondsuit}\right\}.[/latex]</div>
+<h2>Sets and set operations</h2>
+<div>With the term <strong>set </strong>we mean a collection of <em>items</em>: these items are named <strong>elements</strong> in this context and are mathematical in nature. For example, the set of prime numbers includes integer numbers [latex]2, 3, 5, 7, 11, \ldots[/latex] or the set of grades higher than a <em>B-</em> are [latex]A, A-, B+, B[/latex].  A set with no elements is <strong>[pb_glossary id="40"]empty[/pb_glossary]</strong>; a set with one element is a <strong>singleton</strong>. As you can probably tell, our sample space definition can be viewed in this light as the definition of a set.</div>
+</div>
+<div></div>
+<div><strong>Set operations </strong>are a very, very useful way to describe events based on relationships between the outcomes of the random experiment. The most common set operations (and the ones I will predominantly use in this book) are:</div>
+<div></div>
+<ol>
+ 	<li>The <strong>[pb_glossary id="41"]union of two events[/pb_glossary]</strong> [latex]E_1, E_2[/latex] as [latex]E_1 \cup E_2[/latex]. The union can be viewed as an "either/or, or both relationship," when discussing about the relationship between two events.</li>
+ 	<li><span style="font-size: 1em">The <strong>[pb_glossary id="42"]intersection of two events[/pb_glossary]</strong> [latex]E_1, E_2[/latex] as [latex]E_1 \cap E_2[/latex]. The intersection can be viewed as "both events [latex]E_1[/latex] <strong>and</strong> [latex]E_2[/latex] should happen," when discussing about only two events. </span></li>
+ 	<li><span style="font-size: 1em">The <strong>[pb_glossary id="43"]complement[/pb_glossary]</strong> of an event [latex]E[/latex] as [latex]\overline{E}[/latex] (sometimes it is also written as [latex]E^c[/latex] or [latex]E^\prime[/latex]). The complement can be viewed as "<em>any</em> other event but [latex]E[/latex] can happen."</span></li>
+ 	<li><span style="font-size: 1em">The </span><strong style="font-size: 1em">[pb_glossary id="44"]relative complement[/pb_glossary]</strong><span style="font-size: 1em"> (sometimes termed as the difference) of an event [latex]E_2[/latex] from event [latex]E_1[/latex] as [latex]E_1\setminus E_2[/latex]. The relative complement can be viewed as "all </span>outcomes in [latex]E_1[/latex] that are not included in [latex]E_2[/latex]."</li>
+</ol>
+Let us check some examples before proceeding.
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Prime factorization</p>
+
+</header>
+<div class="textbox__content">
+
+In mathematics, we define the prime factorization of an integer number as the set of all prime numbers that can perfectly divide it. Hence, let us define our set [latex]E_1[/latex] as all the factors of integer number 2025. That is, [latex]E_1=\left\{1, 3, 5, 9, 15, 25, 27, 45, 75, 81, 135, 225, 405, 675, 2025\right\}.[/latex] Now, define [latex]E_2[/latex] as the set of all prime numbers: [latex]E_2=\left\{2, 3, 5, 7, 11, 13, 17, 19, 23, \ldots\right\}[/latex].
+
+Then, the prime factorization of 2025 can be written as [latex]E_1 \cap E_2[/latex]. In other words, the set of prime factors of integer number 2025 is the intersection between the set of its factors ([latex]E_1[/latex]) and the set of prime numbers ([latex]E_2[/latex]).
+
+</div>
+</div>
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Good day for a barbecue</p>
+
+</header>
+<div class="textbox__content">
+
+Assume that tomorrow's weather can be represented as a random experiment with sample space [latex]S=\left\{\text{sun}, \text{clouds}, \text{rain}\right\}.[/latex] Then, we could say that a good day for a barbecue is a day without rain. If [latex]E=\left\{\text{rain}\right\}[/latex], then a good day for a barbecue is [latex]\overline{E}[/latex].
+
+</div>
+</div>
+<h3>Sets and Venn diagrams</h3>
+<div>
+<div>Set operations can be nicely described through the use of Venn diagrams. Consider the following examples, where the whole sample space consists of [latex]A[/latex], [latex]B[/latex], and [latex]C[/latex]. In all of the following cases, the shaded area shows the set operation visually.</div>
+</div>
+<ol>
+ 	<li>[latex]A[/latex] and [latex]B[/latex] should both happen ⇒ [latex]A \cap B[/latex]:
+<img class="size-medium wp-image-55 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/02/Screenshot-2025-07-01-at-8.31.08 AM-300x296.png#fixme" alt="" width="300" height="296" /></li>
+ 	<li>[latex]B[/latex] or [latex]C[/latex] should happen ⇒ [latex]B \cup C[/latex]:
+<img class="size-medium wp-image-58 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/02/Screenshot-2025-07-01-at-1.01.26 PM-300x296.png#fixme" alt="" width="300" height="296" /></li>
+ 	<li><span style="font-size: 1em">Neither [latex]A[/latex] nor [latex]B[/latex] should happen ⇒ [latex]\overline{A} \cap \overline{B}[/latex].
+<img class="size-medium wp-image-59 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/02/Screenshot-2025-07-01-at-1.01.46 PM-300x296.png#fixme" alt="" width="300" height="296" />
+Since we assumed that [latex]S=A\cup B\cup C[/latex] (that is, [latex]A, B,[/latex] and [latex]C[/latex] make up the whole sample space), then [latex]\overline{A} \cap \overline{B}[/latex] can also be expressed as:</span>
+<ol>
+ 	<li><span style="font-size: 1em">Only [latex]C[/latex] should happen but not [latex]A[/latex] nor [latex]B[\latex]⇒ [latex]C\setminus \left(A\cup B\right).[/latex] </span></li>
+ 	<li><span style="font-size: 1em">[latex]A[/latex] or [latex]B[/latex] should not happen ⇒ [latex]\overline{\left(A\cup B\right)}.[/latex]</span></li>
+</ol>
+</li>
+ 	<li><span style="font-size: 1em">[latex]A[/latex], [latex]B[/latex], and [latex]C[/latex] should all happen ⇒ [latex]A\cap B\cap C[/latex]:
+<img class="size-medium wp-image-60 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/02/Screenshot-2025-07-01-at-1.01.55 PM-300x296.png#fixme" alt="" width="300" height="296" /></span></li>
+ 	<li>[latex]A[/latex], but not [latex]B[/latex], should happen <span style="font-size: 1em">⇒ [latex]A\setminus B[/latex]:
+<img class="size-medium wp-image-61 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/02/Screenshot-2025-07-01-at-1.02.11 PM-300x296.png#fixme" alt="" width="300" height="296" />
+</span></li>
+</ol>
+Let's practice these together.
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Practice with Venn diagrams</p>
+
+</header>
+<div class="textbox__content">
+
+<img class="wp-image-62 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/02/Screenshot-2025-07-01-at-1.02.24 PM-300x154.png#fixme" alt="" width="433" height="222" />
+
+Explain these two Venn diagrams in words and mathematically.
+
+For the first one (left Venn diagram), we want [latex]A[/latex] or [latex]C[/latex], but not [latex]B[/latex]. In mathematical terms, we can write this as [latex]\left(A\cup C\right)\setminus B[/latex]. In the second one (right Venn diagram), we are looking at [latex]A[/latex] and [latex]C[/latex], but not [latex]B[/latex]. Again, mathematically, we have [latex]\left(A\cap C\right)\setminus B[/latex].
+
+</div>
+</div>
+<div>
+<h3>More set definitions</h3>
+We have already established some vocabulary for sets, but it is useful to provide more details before proceeding. Specifically, we define the following:
+<ul>
+ 	<li>[pb_glossary id="40"]<strong>Empty</strong> <strong>set</strong>[/pb_glossary]: a set containing no elements is called an empty or a null set, and is denoted by [latex]\emptyset[/latex].</li>
+ 	<li><strong>[pb_glossary id="61"]Subsets and supersets[/pb_glossary]</strong>: assume that all elements of set [latex]S_2[/latex] are contained in another set [latex]S_1[/latex]. Then, we say that set [latex]S_1[/latex] is a superset of [latex]S_2[/latex] and that set [latex]S_2[/latex] is a superset of [latex]S_1[/latex], and we write that [latex]S_2 \subseteq S_1[/latex].
+<ul>
+ 	<li>Assume again that all elements of set [latex]S_2[/latex] are contained in another set [latex]S_1[/latex]. Then, if there is at least one element in [latex]S_1[/latex] that is not included in [latex]S_2[/latex], we say that set [latex]S_1[/latex] is a proper superset of [latex]S_2[/latex] and we write that [latex]S_2 \subset S_1[/latex] (similarly, we say that set [latex]S_2[/latex] is a proper subset of [latex]S_1[/latex]).</li>
+ 	<li>By definition, the empty set is a subset of any other set.</li>
+</ul>
+</li>
+ 	<li><span style="font-size: 1em"><strong>[pb_glossary id="45"]Mutually exclusive events[/pb_glossary]</strong>: we say that two events are <strong>mutually exclusive</strong> if they contain no common outcomes. Mathematically, two events [latex]E_1, E_2[/latex] are mutually exclusive if [latex]E_1\cap E_2=\emptyset.[/latex]. </span></li>
+</ul>
+Visually, using Venn diagrams, we can see that a subset would all belong inside a superset. For example, if [latex]E_1\subseteq E_2[/latex], we could expect the following Venn diagram.
+
+<img class=" wp-image-69 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/02/Screenshot-2025-07-01-at-1.43.39 PM-300x249.png#fixme" alt="" width="333" height="276" />
+
+In the case of two mutually exclusive events [latex]E_1, E_2[/latex], we could expect a Venn diagram like the following:
+
+<img class=" wp-image-71 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/02/Screenshot-2025-07-01-at-1.47.43 PM-300x249.png#fixme" alt="" width="347" height="288" />
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Subsets and supersets</p>
+
+</header>
+<div class="textbox__content">
+
+Consider a sample space [latex]S=\left\{1,2,3,4,5,6,7,8,9,10\right\}[/latex] and four events/sets:
+<ol>
+ 	<li>[latex]A=\left\{1,2,3,4,5\right\}[/latex]: the number picked from [latex]S[/latex] is smaller than or equal to [latex]5[/latex].</li>
+ 	<li>[latex]B=\left\{9,10\right\}[/latex]: the number picked from [latex]S[/latex] is greater than [latex]8[/latex].</li>
+ 	<li>[latex]C=\left\{2,3,5,7\right\}[/latex]: the number picked from [latex]S[/latex] is prime.</li>
+ 	<li>[latex]D=\left\{2,4,6,8\right\}[/latex]: the number picked from [latex]S[/latex] is prime.</li>
+</ol>
+Then, we have:
+<ul>
+ 	<li>[latex]A\subseteq \overline{B}[/latex]. That is, set [latex]A=\left\{1,2,3,4,5\right\}[/latex] is a subset of [latex]\overline{B}=\left\{1,2,3,4,5,6,7,8\right\}.[/latex]
+<ul>
+ 	<li>Even more, we can see that [latex]A\subset \overline{B}[/latex], as there are elements in [latex]\overline{B}[/latex] that are not included in [latex]A[/latex].</li>
+</ul>
+</li>
+ 	<li>[latex] B\cap C=\emptyset[/latex]. Notice how [latex]B[/latex] and [latex]C[/latex] contain no common elements and hence the intersection between [latex]B[/latex] and [latex]C[/latex] is empty.
+<ul>
+ 	<li>This means that [latex]B[/latex] and [latex]C[/latex] are mutually exclusive events.</li>
+</ul>
+</li>
+ 	<li>[latex]A\cup B\cup C\cup D=S[/latex]. The union of all four sets makes up the whole sample space: there is no element in the sample space [latex]S[/latex] that does not appear in at least one of the four sets [latex]A, B, C, D[/latex].</li>
+</ul>
+</div>
+</div>
+<div>
+<div class="textbox textbox--exercises"><header class="textbox__header">
+<p class="textbox__title">Real life subsets and mutually exclusive enents</p>
+
+</header>
+<div class="textbox__content">
+
+Can you provide an example of a real-life random experiment and come up with two events such as one of them is a subset of the other? Can you identify two events that are mutually exclusive?
+<ul>
+ 	<li>How about passing a class and getting an A?</li>
+ 	<li>Or not raining tomorrow, but it being cloudy?</li>
+</ul>
+</div>
+</div>
+Before proceeding to see some set operation laws (such as the famous De Morgan laws) and the definition of cardinality, we go once again back to our motivational card game. <span style="font-size: 1em">Assume that the sample space [latex]S=\left\{1\textcolor{red}{\heartsuit}, 2\textcolor{red}{\heartsuit}, \ldots, K\textcolor{red}{\heartsuit}, 1\clubsuit, 2\clubsuit, \ldots, K\spadesuit\right\},[/latex] and consider three events:</span>
+<ul>
+ 	<li><span style="font-size: 1em">[latex]A=[/latex]"get a card with the value [latex]3[/latex] or less."</span></li>
+ 	<li><span style="font-size: 1em">[latex]B=[/latex]"get a <span style="color: #ff0000">red</span> card."</span></li>
+ 	<li><span style="font-size: 1em">[latex]C=[/latex]"get a face card ([latex]J, Q, K[/latex])."</span></li>
+</ul>
+</div>
+</div>
+<div>What is:</div>
+<ol>
+ 	<li><span style="font-size: 1em">the union of [latex]A[/latex] and [latex]B[/latex]?</span></li>
+ 	<li>the intersection of [latex]B[/latex] and [latex]C[/latex]?</li>
+ 	<li>the intersection of [latex]A[/latex] and [latex]C[/latex]?</li>
+ 	<li>the complement of [latex]C[/latex]?</li>
+</ol>
+Let us start with the union of <span style="font-size: 1em">[latex]A[/latex] and [latex]B[/latex]: </span>
+<ol>
+ 	<li><span style="font-size: 1em">[latex]A\cup B[/latex]: "get a card with the value of 3 or less <span style="text-decoration: underline">or</span> a red card."</span>
+<ul>
+ 	<li><span style="font-size: 1em">The event happens if we get [latex]7[/latex]<span style="color: #ff6600">♥</span>.</span></li>
+ 	<li><span style="font-size: 1em">The event happens if we get [latex]2[/latex]<span style="color: #ff6600">♦</span>.</span></li>
+ 	<li><span style="font-size: 1em">The event happens if we get [latex]1[/latex]<span style="color: #ff6600"><span style="color: #000000">♠</span></span>.</span></li>
+ 	<li><span style="font-size: 1em">The event does not happen if we get [latex]10[/latex]♣.</span></li>
+</ul>
+</li>
+ 	<li><span style="font-size: 1em">[latex]B\cap C[/latex]: "get a red <span style="text-decoration: underline">and</span> face card."</span>
+<ul>
+ 	<li><span style="font-size: 1em">The event happens if we get [latex]Q[/latex]<span style="color: #ff6600">♥<span style="color: #000000">.</span></span></span></li>
+ 	<li><span style="font-size: 1em">The event happens if we get [latex]J[/latex]<span style="color: #ff6600">♦<span style="color: #000000">.</span></span></span></li>
+ 	<li><span style="font-size: 1em">The event does not happen if we get [latex]1[/latex]<span style="color: #ff6600"><span style="color: #000000">♠.</span></span></span></li>
+ 	<li><span style="font-size: 1em">The event does not happen if we get [latex]K[/latex]♣.</span></li>
+</ul>
+</li>
+ 	<li><span style="font-size: 1em">[latex]A\cap C[/latex]: "get a face card that is <span style="text-decoration: underline">also</span> less than or equal to 3 in value."</span>
+<ul>
+ 	<li><span style="text-align: initial;font-size: 1em">The event never happens.</span></li>
+ 	<li><span style="font-size: 1em">In set notation, we have [latex]B\cap C=\emptyset[/latex].</span></li>
+ 	<li><span style="font-size: 1em">[latex]B[/latex] and [latex]C[/latex] are mutually exclusive events.</span></li>
+</ul>
+</li>
+ 	<li>[latex]\overline{C}[/latex]: "<span style="text-decoration: underline">not</span> get a face card."
+<ul>
+ 	<li><span style="font-size: 1em;text-align: initial">The event does not happen if we <span style="font-size: 1em">get [latex]Q[/latex]<span style="color: #ff6600">♥<span style="color: #000000">.</span></span></span></span></li>
+ 	<li><span style="font-size: 1em">The event does not happen if we get [latex]J[/latex]<span style="color: #ff6600">♦<span style="color: #000000">.</span></span></span></li>
+ 	<li><span style="font-size: 1em">The event happens if we get [latex]1[/latex]<span style="color: #ff6600"><span style="color: #000000">♠.</span></span></span></li>
+ 	<li><span style="font-size: 1em">The event happens if we get [latex]6[/latex]♣.</span></li>
+</ul>
+</li>
+</ol>
+<div>
+<h3>Laws for set operations and cardinality</h3>
+<div>Assume [latex]S[/latex] is the sample space of our random experiment, and [latex]A, B, C[/latex] are some events. Then, we have the following laws:</div>
+<ol>
+ 	<li>[latex]A\cup \overline{A}=S[/latex]: all the elements in [latex]A[/latex] and all the elements in "not A" ([latex]\overline{A}[/latex]) make up the whole sample space.</li>
+ 	<li>[latex]A\cap \overline{A}=\emptyset[/latex]: there are no common elements in [latex]A[/latex] and in "not A" ([latex]\overline{A}[/latex]).</li>
+ 	<li>[latex]\overline{\overline{A}}=A[/latex]: the complement of the complement of any event, is the event itself!These three properties are shown in the following figure.
+<img class=" wp-image-76 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/02/Screenshot-2025-07-02-at-9.32.26 AM-300x249.png#fixme" alt="" width="346" height="287" /></li>
+</ol>
+</div>
+<div>We also define the transitive property for the union and intersection. Namely:</div>
+<ol>
+ 	<li><span style="font-size: 1em">[latex]A\cup B=B\cup A[/latex] and </span></li>
+ 	<li><span style="font-size: 1em">[latex]A\cap B=B\cap A[/latex].</span></li>
+</ol>
+Finally, we are ready to reveal De Morgan's laws:
+<ol>
+ 	<li><span style="font-size: 1em">[latex]\overline{\left(A\cup B\right)}=\overline{A}\cap \overline{B}.[/latex]</span></li>
+ 	<li><span style="font-size: 1em">[latex]\overline{\left(A\cap B\right)}=\overline{A}\cup \overline{B}.[/latex]</span></li>
+ 	<li><span style="font-size: 1em">[latex]A\cup\left(B\cup C\right)=\left(A\cup B\right)\cup C, ~~ A\cap\left(B\cap C\right)=\left(A\cap B\right)\cap C.[/latex]</span></li>
+ 	<li><span style="font-size: 1em">[latex]A\cup\left(B\cap C\right)=\left(A\cup B\right)\cap \left(A\cup C\right), ~~A\cap\left(B\cup C\right)=\left(A\cap B\right)\cup \left(A\cap C\right).[/latex]</span></li>
+</ol>
+<div>
+<div>The <strong>[pb_glossary id="46"]cardinality[/pb_glossary]</strong> of an event [latex]E[/latex] is a measure of its size and it corresponds to the number of elements/outcomes that it contains. It is denoted by [latex]\left|E\right|[/latex].</div>
+<div>
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Cardinality</p>
+
+</header>
+<div class="textbox__content">
+
+Consider a graded course, with a sample space (possible grades) of [latex]S=\left\{A, A-, B+, B, B-, \ldots F\right\}[/latex].
+<ul>
+ 	<li>Let event [latex]E_1[/latex] be that you pass the class (i.e., get a score greater than or equal to a C-): we have that [latex]E_1=\left\{A, A-, B+, B, B-, C+, C, C-\right\}[/latex] and its cardinality is [latex]\left|E_1\right|=8[/latex].</li>
+ 	<li>Let event [latex]E_2[/latex] be that you "score in the B zone" (i.e., get a score greater than or equal to a B-, but lower than or equal to a B+): we have that [latex]E_2=\left\{B+, B, B-\right\}[/latex] and its cardinality is [latex]\left|E_2\right|=3[/latex].</li>
+</ul>
+</div>
+</div>
+Note that the cardinality is properly defined for events that can be <em>counted</em>. More on counting in our next chapter! We now proceed to some important cardinality properties.
+<ol>
+ 	<li><span style="font-size: 1em">[latex]E=\emptyset \implies |E|=0.[/latex] This states that an empty set includes no elements.</span></li>
+ 	<li>[latex] E_1 \subseteq E_2 \implies |E_1|\leq |E_2|[/latex]. Again, this implies that a set that is wholly included in another set has at most the same cardinality.
+<ul>
+ 	<li>A proper subset has a strictly smaller cardinality: [latex] E_1 \subset E_2 \implies |E_1|&lt;|E_2|[/latex]</li>
+</ul>
+</li>
+ 	<li>Two mutually exclusive events [latex]E_1, E_2[/latex] have that:
+<ul>
+ 	<li>[latex]|E_1\cap E_2|=0;[/latex]</li>
+ 	<li>[latex]|E_1\cup E_2|=|E_1|+|E_2|.[/latex]</li>
+</ul>
+</li>
+ 	<li>Finally, we provide the following statement without proof (but check the activity sheet for the chapter for a way to prove it): for <em>any</em> two events [latex]E_1, E_2[/latex], we have that [latex]|E_1\cup E_2|=|E_1|+|E_2|-|E_1\cap E_2|[/latex].</li>
+</ol>
+</div>
+</div>
+<div>
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Back to our motivation card game</p>
+
+</header>
+<div class="textbox__content">
+<div>Let us finally discuss the actual card problem of our motivation. Assume, once again, that our sample space is defined as: [latex]S=\left\{1\textcolor{red}{\heartsuit}, 2\textcolor{red}{\heartsuit}, \ldots, K\textcolor{red}{\heartsuit}, 1\clubsuit, 2\clubsuit, \ldots, K\spadesuit\right\}.[/latex]</div>
+<div></div>
+<div>Our game states that we win if we pick a red card. There are 13 [latex]\textcolor{red}{\heartsuit}[/latex] and 13 [latex]\textcolor{red}{\diamondsuit}[/latex] cards in the game. This gives us a cardinality of 26 outcomes. Recall that in total, our sample space consists of 52 outcomes, that is [latex]|S|=52[/latex]. <strong>One might want to reason then that we have 26 favorable outcomes in a total of 52 outcomes...</strong></div>
+</div>
+</div>
+&nbsp;
+
+</div>
+<div></div>
+<div>
+<div class="textbox textbox--exercises"><header class="textbox__header">
+<p class="textbox__title">Practicing with cardinalities</p>
+
+</header>
+<div class="textbox__content">
+
+A class at the university is taught by three different professors. The number of students that took the class and the grades they received are shown in the following table.
+<table class="shaded" style="border-collapse: collapse;width: 100%;height: 75px" border="0">
+<tbody>
+<tr style="height: 15px">
+<td style="width: 20%;height: 15px">Letter Grade</td>
+<td style="width: 20%;height: 15px">Professor 1</td>
+<td style="width: 20%;height: 15px">Professor 2</td>
+<td style="width: 20%;height: 15px">Professor 3</td>
+<td style="width: 20%;height: 15px">Total</td>
+</tr>
+<tr style="height: 15px">
+<td style="width: 20%;height: 15px"><strong>A</strong></td>
+<td style="width: 20%;height: 15px">108</td>
+<td style="width: 20%;height: 15px">20</td>
+<td style="width: 20%;height: 15px">30</td>
+<td style="width: 20%;height: 15px">158</td>
+</tr>
+<tr style="height: 15px">
+<td style="width: 20%;height: 15px"><strong>B</strong></td>
+<td style="width: 20%;height: 15px">44</td>
+<td style="width: 20%;height: 15px">49</td>
+<td style="width: 20%;height: 15px">46</td>
+<td style="width: 20%;height: 15px">139</td>
+</tr>
+<tr style="height: 15px">
+<td style="width: 20%;height: 15px"><strong>C</strong></td>
+<td style="width: 20%;height: 15px">11</td>
+<td style="width: 20%;height: 15px">15</td>
+<td style="width: 20%;height: 15px">15</td>
+<td style="width: 20%;height: 15px">41</td>
+</tr>
+<tr style="height: 15px">
+<td style="width: 20%;height: 15px"><strong>D</strong></td>
+<td style="width: 20%;height: 15px">0</td>
+<td style="width: 20%;height: 15px">1</td>
+<td style="width: 20%;height: 15px">8</td>
+<td style="width: 20%;height: 15px">9</td>
+</tr>
+<tr>
+<td style="width: 20%"><strong>Total</strong></td>
+<td style="width: 20%">163</td>
+<td style="width: 20%">85</td>
+<td style="width: 20%">99</td>
+<td style="width: 20%">347</td>
+</tr>
+</tbody>
+</table>
+Answer the following questions.
+<ul>
+ 	<li>What is the cardinality of the event "receiving an [latex]A[/latex] in Professor 1's class?"</li>
+ 	<li>What is the cardinality of the event "receiving an [latex]A[/latex] or being in Professor 1's class?"</li>
+ 	<li>Are the events of "getting an [latex]A[/latex] in Professor 1's class" and "getting a [latex]B[/latex] in Professor 1's class" mutually exclusive events?</li>
+ 	<li>What is the cardinality of the intersection of the events "getting an [latex]A[/latex]" and "not being in Professor 1's class?"</li>
+</ul>
+</div>
+</div>
+<div class="textbox textbox--examples"><header class="textbox__header">
+<p class="textbox__title">Back to Monopoly</p>
+
+</header>
+<div class="textbox__content">
+
+In the beginning of this chapter, we only needed to roll a 6 or a 7 to "survive" another round (so to speak) of Monopoly. Let us finish this chapter with the following thought process:
+<ul>
+ 	<li>The sample space of rolling two dies is: [latex]S=\left\{\left(1,1\right), \left(1,2\right), \left(1,3\right), \ldots, \left(1,6\right), \left(2,1\right), \ldots, \left(6,6\right)\right\}.[/latex]</li>
+ 	<li>Counting all possible outcomes, we have that [latex]S=|36|.[/latex]</li>
+ 	<li>The event "roll a 6" contains 5 outcomes: [latex]\left\{\left(1,5\right), \left(2,4\right), \left(3,3\right), \left(4,2\right), \left(5,1\right)\right\}.[/latex]</li>
+ 	<li>The event "roll a 7" contains 6 outcomes: [latex]\left\{\left(1,6\right), \left(2,5\right), \left(3,4\right), \left(4,3\right), \left(5,2\right), \left(6,1\right)\right\}.[/latex]</li>
+ 	<li>"Roll a 6" and "roll a 7" are mutually exclusive events. They cannot happen at the same time (they share no common outcomes).</li>
+ 	<li>Hence, we have a total of [latex]5+6=11[/latex] favorable outcomes.</li>
+</ul>
+While we have yet to quantify probabilities and risks, it sounds like we have [latex]11[/latex] favorable outcomes out of a total of [latex]36[/latex]. This doesn't sound as small as we originally thought after all, no?
+
+</div>
+</div>
+<h1>Activities</h1>
+<h2>Activity 1: Playing with coins</h2>
+<h3>Problem 1</h3>
+<div>
+
+A coin is tossed 4 times in a row and we mark whether it has come up Heads or Tails each time. Explain (in a sentence) why this is a random experiment. [footnote]Consider what happens if we repeat this process. Do we always get the same sequence?[/footnote]
+<h3>Problem 2</h3>
+</div>
+<div>
+
+In the experiment from Problem 1, what is the sample space [latex]S[/latex]? [footnote]In general, there are multiple ways to define a sample space. Here, we may want to focus on each individual coin toss as it happens. For example, [latex]\left\{Heads, Heads, Tails, Heads\right\}[/latex] could be a potential outcome, whereas [latex]\left\{Tails, Tails, Tails, Heads\right\}[/latex] would be another.[/footnote] What is the cardinality of the sample space [latex]|S|[/latex]?
+
+</div>
+<h3>Problem 3</h3>
+<div>Once again, consider the experiment from Problem 1. What is the cardinality of the following events:</div>
+<ul>
+ 	<li>Get the sequence Heads, Tails, Tails, Heads.</li>
+ 	<li><span style="font-size: 1em">The third coin toss comes up Heads.</span></li>
+ 	<li><span style="font-size: 1em">Get at least three Heads. </span></li>
+</ul>
+<div>
+<div class="textbox shaded">
+
+Hmm.. You know what's interesting? When all outcomes in the sample space are equally likely, then the "likelihood" of an event happening (<em>probability </em>perhaps?) is equal to the cardinality of the event over the cardinality of the sample space! For example, "Get at least three Heads" has cardinality [latex]5[/latex], and the sample space [latex]S[/latex] has cardinality [latex]|S|=16[/latex] for a "likelihood" of [latex]5/16=31.25\%.[/latex]
+
+</div>
+<h3>Problem 4</h3>
+</div>
+<div>Consider the events in Problem 3. Are the first and the second events mutually exclusive? How about the first and the third events? Finally, what can you say about the second and the third events? Justify (in a sentence) your answer.</div>
+<h2>Activity 2: Random number generators</h2>
+<h3>Problem 5</h3>
+<div>Let us stay with <strong>discrete sample spaces</strong>: that is, sample spaces where the set of outcomes is discrete. Consider a six-sided die with sides equal to the numbers [latex]S=\left\{1,2,3,4,5,6\right\}.[/latex] Now, define the following:</div>
+<ul>
+ 	<li>[latex]A[/latex]: the number on the die is even ([latex]2, 4, 6[/latex]).</li>
+ 	<li>[latex]B[/latex]: the number on the die is smaller than or equal to 3 ([latex]1,2,3[/latex]).</li>
+ 	<li>[latex]C[/latex]: the number on the die is [latex]2[/latex].</li>
+</ul>
+<div>What is [latex]A\cap \overline{B}[/latex], [latex]A\cap B[/latex], and [latex]B\cap C[/latex]? Enumerate the outcomes that fall in each of them.</div>
+<h3>Problem 6</h3>
+<div>Assume that we have a random number generator that produces <strong>real</strong> numbers between 0 and 100. That is, the generator can produce numbers such as [latex]33.33[/latex] or [latex]0.08[/latex], but no negative numbers or numbers above 100. In set notation/range, we have sample space [latex]S=\left[0, 100\right][/latex]. Now, let us define the following events:</div>
+<ul>
+ 	<li>[latex]A=\left[80,100\right][/latex]:<span style="font-size: 1em"> the number produced is greater than or equal to 80.</span></li>
+ 	<li><span style="font-size: 1em">[latex]B=[20,50][/latex]: the number produced is greater than or equal to 20, but smaller than or equal to 50.</span></li>
+ 	<li><span style="font-size: 1em">[latex]C=[35,85][/latex]: the number produced is greater than or equal to 35, but smaller than or equal to 85.</span></li>
+</ul>
+<div>Calculate the range of values for each of the following events. For example, if asked to find what [latex]A\cap C[/latex], you would answer [latex]\left[80,85\right][/latex], as [latex]A\cap C[/latex] includes values that are both in [latex]A[/latex] and in [latex]C[/latex] at the same time. Be careful with the inclusion and exclusion notation [latex]\left[~,~\right][/latex] and [latex]\left(~,~\right)[/latex], respectively!</div>
+<div></div>
+<div>What are the range of values of:</div>
+<ul>
+ 	<li><span style="font-size: 1em">[latex]\overline{C}=[/latex]</span></li>
+ 	<li>[latex]C\setminus A=[/latex]</li>
+ 	<li>[latex]B\cap C=[/latex]</li>
+ 	<li>[latex](\overline{A}\cap B)\cup(\overline{A}\cap C)=[/latex]</li>
+</ul>
+<h2>Activity 3: Set and cardinality properties</h2>
+<div>We saw many interesting properties in the first chapter. Now, it is time to study and follow their derivations. To begin with, consider the first of the two De Morgan's law we saw in the first chapter: [latex]\overline{\left(A\cup B\right)}=\overline{A}\cap \overline{B}.[/latex]</div>
+<h3>Problem 7</h3>
+<div>In the two Venn diagrams below, we mark in gray the event [latex]\left(A\cup B\right)[/latex] and [latex]\overline{\left(A\cup B\right)}[/latex] (corresponding to the left hand side). We have solved this for you, so you can move to Problem 8.</div>
+<div></div>
+<div><img class=" wp-image-93 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/07/Screenshot-2025-07-02-at-11.54.47 AM-300x143.png#fixme" alt="" width="417" height="199" /></div>
+<h3>Problem 8</h3>
+<div>In the three Venn diagrams provided, mark the events [latex]\overline{A}, \overline{B}[/latex], and [latex]\overline{A}\cap \overline{B}[/latex] (corresponding to the right hand side of the DeMorgan's law).</div>
+<div></div>
+<div><img class=" wp-image-92 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/07/Screenshot-2025-07-02-at-11.55.07 AM-300x248.png#fixme" alt="" width="373" height="308" /></div>
+<div></div>
+<div>
+<div class="textbox shaded">
+
+Note how the last Venn diagram in Problem 8 (the one for [latex]\overline{A}\cap\overline{B}[/latex]) is the same as the last Venn diagram in Problem 7 (the one corresponding to [latex]\overline{\left(A\cup B\right)}[/latex], "proving" De Morgan's law.
+
+</div>
+</div>
+<h3>Problem 9</h3>
+<div>Based on the previous constructive derivation you did, what can you say about the extension of this De Morgan's law to more than 2 events? Specifically, what is [latex]\overline{\left(A\cup B\cup C\right)}[/latex]? Use the diagrams below to do something similar to what you did in Problems 7 and 8.</div>
+<div></div>
+<div><img class="wp-image-91 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/07/Screenshot-2025-07-02-at-11.55.18 AM-206x300.png#fixme" alt="" width="457" height="666" /></div>
+<h3>Problem 10</h3>
+<div>Consider two <strong>mutually exclusive</strong> events [latex]A, B.[/latex] What can you say about the cardinality of [latex]A\cap B[/latex] and of [latex]A\cup B[/latex]? You may express your answer as a function of the individual cardinalities [latex]|A|, |B|.[/latex]</div>
+<h3>Problem 11</h3>
+<div>It is true that for two general sets [latex]A, B[/latex], we have that [latex]|A\cup B|=|A|+|B|-|A\cap B|.[/latex] Let us construct a proof for the statement using your answers in Problem 10.</div>
+<div></div>
+<div>Consider an event [latex]X[/latex] that is comprised of <strong>three mutually exclusive events</strong> [latex]X_1, X_2, X_3[/latex]. What can you say about the cardinality of [latex]X[/latex] and the cardinalities of [latex]X_1, X_2, X_3[/latex]? Choose the (one) correct answer.</div>
+<div></div>
+<div>
+<table style="border-collapse: collapse;width: 100%;height: 75px" border="0">
+<tbody>
+<tr style="height: 15px">
+<td style="width: 9.416446%;height: 15px"></td>
+<td style="width: 11.472148%;height: 15px">(a) [latex]&lt;[/latex]</td>
+<td style="width: 79.111406%"></td>
+</tr>
+<tr style="height: 15px">
+<td style="width: 9.416446%;height: 15px"></td>
+<td style="width: 11.472148%;height: 15px">(b) [latex]\leq [/latex]</td>
+<td style="width: 79.111406%"></td>
+</tr>
+<tr style="height: 15px">
+<td style="width: 9.416446%;height: 15px">[latex]|X|[/latex]</td>
+<td style="width: 11.472148%;height: 15px">(c) [latex]=[/latex]</td>
+<td style="width: 79.111406%">[latex]|X_1|+|X_2|+|X_3|[/latex]</td>
+</tr>
+<tr style="height: 15px">
+<td style="width: 9.416446%;height: 15px"></td>
+<td style="width: 11.472148%;height: 15px">(d) [latex]\geq [/latex]</td>
+<td style="width: 79.111406%"></td>
+</tr>
+<tr style="height: 15px">
+<td style="width: 9.416446%;height: 15px"></td>
+<td style="width: 11.472148%;height: 15px">(e) [latex]&gt;[/latex]</td>
+<td style="width: 79.111406%"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<div class="textbox shaded">
+
+This is true, in general, no matter how many mutually exclusive events we can break an event down to. Say that event [latex]X[/latex] consisted of [latex]n[/latex] mutually exclusive events [latex]X_1, X_2, \ldots, X_n[/latex], we could write that its cardinality [latex]|X|[/latex] is equal to the summation of the individual event cardinalities: [latex]|X|=\sum\limits_{i=1}^n |X_i|.[/latex]
+
+</div>
+</div>
+<h3>Problem 12</h3>
+<div>Based on your observation in Problem 11, can we think of [latex]A\cup B[/latex] as three mutually exclusive events? Check the following Venn diagram and mark the <strong>three mutually exclusive events</strong> that describe the greyed area. How are they described mathematically?</div>
+<div></div>
+<div><img class=" wp-image-95 aligncenter" src="https://pb-sandbox.library.illinois.edu/testtextbox/wp-content/uploads/sites/332/2025/07/Screenshot-2025-07-02-at-12.04.36 PM-300x185.png#fixme" alt="" width="399" height="246" /></div>
+<h3>Problem 13</h3>
+<div>Combine your observations from Problems 11 and 12 to derive that [latex]|A\cup B|=|A|+|B|-|A\cap B|.[/latex]</div>
+<div></div>
+</div>
