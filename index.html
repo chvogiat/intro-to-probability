@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Critical value calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink2: #4a4a44;
+    --ink3: #8a8a80;
+    --paper: #f5f2eb;
+    --paper2: #ede9df;
+    --paper3: #e3dfd3;
+    --rule: #c8c4b4;
+    --accent: #1a3a2a;
+    --accent2: #2d5c42;
+    --accent-light: #d4e8dc;
+    --red: #8a2020;
+    --serif: 'Libre Baskerville', Georgia, serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 20px 80px;
+  }
+
+  /* Subtle dot grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--rule) 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .card {
+    position: relative;
+    background: #faf8f2;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    width: 100%;
+    max-width: 540px;
+    box-shadow: 4px 4px 0 var(--paper3), 8px 8px 0 var(--rule);
+    animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-head {
+    padding: 32px 36px 24px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--accent);
+    border-radius: 2px 2px 0 0;
+  }
+
+  .card-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #7aaa8e;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: #f0ede4;
+    line-height: 1.2;
+  }
+
+  .card-title em {
+    font-style: italic;
+    color: #a8d4bc;
+  }
+
+  .card-body { padding: 32px 36px; }
+
+  /* Field */
+  .field { margin-bottom: 22px; }
+  .field:last-of-type { margin-bottom: 0; }
+
+  .field-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 7px;
+  }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  select, input[type="number"] {
+    width: 100%;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a8a80'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+    cursor: pointer;
+  }
+
+  select:focus, input[type="number"]:focus {
+    border-color: var(--accent2);
+    background: #fff;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button { opacity: 0.4; }
+
+  /* Separator */
+  .sep {
+    border: none;
+    border-top: 1px dashed var(--rule);
+    margin: 28px 0;
+  }
+
+  /* Result */
+  .result {
+    background: var(--accent);
+    border-radius: 2px;
+    padding: 24px 28px;
+    margin-top: 28px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: none;
+  }
+
+  .result.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .result-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #7aaa8e;
+    margin-bottom: 10px;
+  }
+
+  .result-number {
+    font-family: var(--mono);
+    font-size: 52px;
+    font-weight: 500;
+    color: #f0ede4;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 14px;
+    word-break: break-all;
+  }
+
+  /* Error */
+  .error-msg {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--red);
+    margin-top: 10px;
+    display: none;
+  }
+
+  /* Params container */
+  #extra-params { margin-top: 22px; }
+  #extra-params:empty { margin-top: 0; }
+
+  /* Footer */
+  .card-foot {
+    padding: 16px 36px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink3);
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 480px) {
+    .card-head, .card-body { padding-left: 24px; padding-right: 24px; }
+    .card-foot { padding-left: 24px; padding-right: 24px; }
+    .result-number { font-size: 38px; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-head">
+    <div class="card-eyebrow">Statistical Reference</div>
+    <div class="card-title">Critical Value<br><em>Calculator</em></div>
+  </div>
+
+  <div class="card-body">
+
+    <div class="field">
+      <label class="field-label" for="dist">Distribution</label>
+      <select id="dist" onchange="updateParams()">
+        <option value="z">Z — Standard Normal</option>
+        <option value="t">t — Student's t</option>
+        <option value="chi2">χ² — Chi-Squared</option>
+        <option value="f">F — Fisher–Snedecor</option>
+      </select>
+    </div>
+
+    <div id="extra-params"></div>
+
+    <hr class="sep">
+
+    <div class="field">
+      <label class="field-label" for="alpha">Significance level α</label>
+      <input type="number" id="alpha" value="0.05" min="0.0001" max="0.9999" step="0.005" oninput="compute()">
+    </div>
+
+    <div class="error-msg" id="error-msg"></div>
+
+    <div class="result" id="result-box">
+      <div class="result-eyebrow" id="result-label">Critical value</div>
+      <div class="result-number" id="result-val">—</div>
+    </div>
+
+  </div>
+
+  <div class="card-foot">
+    <span>Z · t · χ² · F</span>
+  </div>
+</div>
+
+<script>
+/* ── Math utilities ─────────────────────────────────────── */
+function erf(x){const t=1/(1+0.3275911*Math.abs(x));const p=t*(0.254829592+t*(-0.284496736+t*(1.421413741+t*(-1.453152027+t*1.061405429))));const r=1-p*Math.exp(-x*x);return x>=0?r:-r;}
+function normInv(p){if(p<=0)return-Infinity;if(p>=1)return Infinity;const a=[2.50662823884,-18.61500062529,41.39119773534,-25.44106049637],b=[-8.47351093090,23.08336743743,-21.06224101826,3.13082909833],c=[0.3374754822726147,0.9761690190917186,0.1607979714918209,0.0276438810333863,0.0038405729373609,0.0003951896511349,0.0000321767881768,0.0000002888167364,0.0000003960315187];let q=p-0.5;if(Math.abs(q)<=0.42){let r=q*q;return q*(((a[3]*r+a[2])*r+a[1])*r+a[0])/((((b[3]*r+b[2])*r+b[1])*r+b[0])*r+1);}let r=q<0?p:1-p;r=Math.log(-Math.log(r));let x=c[0]+r*(c[1]+r*(c[2]+r*(c[3]+r*(c[4]+r*(c[5]+r*(c[6]+r*(c[7]+r*c[8])))))));return q<0?-x:x;}
+function lgamma(x){const c=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5];let y=x,tmp=x+5.5;tmp-=(x+0.5)*Math.log(tmp);let ser=1.000000000190015;for(let j=0;j<6;j++)ser+=c[j]/++y;return-tmp+Math.log(2.5066282746310005*ser/x);}
+function betaInc(a,b,x){if(x<=0)return 0;if(x>=1)return 1;const lb=lgamma(a)+lgamma(b)-lgamma(a+b);const front=Math.exp(Math.log(x)*a+Math.log(1-x)*b-lb)/a;function cf(a,b,x){let c=1,d=1-(a+b)*x/(a+1);if(Math.abs(d)<1e-30)d=1e-30;d=1/d;let h=d;for(let m=1;m<=200;m++){let m2=2*m,aa=m*(b-m)*x/((a+m2-1)*(a+m2));d=1+aa*d;if(Math.abs(d)<1e-30)d=1e-30;c=1+aa/c;if(Math.abs(c)<1e-30)c=1e-30;d=1/d;h*=d*c;aa=-(a+m)*(a+b+m)*x/((a+m2)*(a+m2+1));d=1+aa*d;if(Math.abs(d)<1e-30)d=1e-30;c=1+aa/c;if(Math.abs(c)<1e-30)c=1e-30;d=1/d;let del=d*c;h*=del;if(Math.abs(del-1)<3e-7)break;}return h;}
+if(x<(a+1)/(a+b+2))return front*cf(a,b,x);return 1-Math.exp(lgamma(a+b)-lgamma(a)-lgamma(b))*Math.pow(x,a)*Math.pow(1-x,b)/b*cf(b,a,1-x);}
+function tInv(p,df){if(p<=0)return-Infinity;if(p>=1)return Infinity;let lo=-1e4,hi=1e4;for(let i=0;i<200;i++){let mid=(lo+hi)/2,x=df/(df+mid*mid),cdf=0.5*betaInc(df/2,0.5,x);cdf=mid>=0?1-cdf:cdf;cdf<p?lo=mid:hi=mid;}return(lo+hi)/2;}
+function gammaInc(a,x){if(x<=0)return 0;if(x<a+1){let ap=a,sum=1/a,del=1/a;for(let n=1;n<300;n++){ap++;del*=x/ap;sum+=del;if(Math.abs(del)<Math.abs(sum)*3e-8)break;}return sum*Math.exp(-x+a*Math.log(x)-lgamma(a));}let b=x+1-a,c=1e30,d=1/b,h=d;for(let i=1;i<300;i++){let an=-i*(i-a),bi=b+2;d=an*d+bi;if(Math.abs(d)<1e-30)d=1e-30;d=1/d;c=bi+an/c;if(Math.abs(c)<1e-30)c=1e-30;let del=d*c;h*=del;if(Math.abs(del-1)<3e-8)break;}return 1-Math.exp(-x+a*Math.log(x)-lgamma(a))*h;}
+function chi2Inv(p,df){if(p<=0)return 0;if(p>=1)return Infinity;let lo=0,hi=Math.max(df*5,300);for(let i=0;i<200;i++){let mid=(lo+hi)/2;gammaInc(df/2,mid/2)<p?lo=mid:hi=mid;}return(lo+hi)/2;}
+function fInv(p,d1,d2){if(p<=0)return 0;if(p>=1)return Infinity;let lo=0,hi=6000;for(let i=0;i<200;i++){let mid=(lo+hi)/2,x=mid*d1/(mid*d1+d2);betaInc(d1/2,d2/2,x)<p?lo=mid:hi=mid;}return(lo+hi)/2;}
+
+/* ── UI ─────────────────────────────────────────────────── */
+function updateParams() {
+  const dist = document.getElementById('dist').value;
+  const ep = document.getElementById('extra-params');
+  const templates = {
+    z: '',
+    t: `<div class="field"><label class="field-label" for="df1">Degrees of freedom (df)</label><input type="number" id="df1" value="10" min="1" step="1" oninput="compute()"></div>`,
+    chi2: `<div class="field"><label class="field-label" for="df1">Degrees of freedom (df)</label><input type="number" id="df1" value="5" min="1" step="1" oninput="compute()"></div>`,
+    f: `<div class="field-row"><div class="field"><label class="field-label" for="df1">df₁ — numerator</label><input type="number" id="df1" value="3" min="1" step="1" oninput="compute()"></div><div class="field"><label class="field-label" for="df2">df₂ — denominator</label><input type="number" id="df2" value="20" min="1" step="1" oninput="compute()"></div></div>`
+  };
+  ep.innerHTML = templates[dist];
+  compute();
+}
+
+function compute() {
+  const dist  = document.getElementById('dist').value;
+  const alpha = parseFloat(document.getElementById('alpha').value);
+  const errEl = document.getElementById('error-msg');
+  const resBox = document.getElementById('result-box');
+
+  errEl.style.display = 'none';
+
+  if (isNaN(alpha) || alpha <= 0 || alpha >= 1) {
+    errEl.textContent = 'α must be strictly between 0 and 1.';
+    errEl.style.display = 'block';
+    resBox.classList.remove('visible');
+    setTimeout(() => { if (!resBox.classList.contains('visible')) resBox.style.display = 'none'; }, 300);
+    return;
+  }
+
+  let df1 = null, df2 = null;
+  if (dist === 't' || dist === 'chi2') {
+    const el = document.getElementById('df1');
+    if (!el) return;
+    df1 = parseInt(el.value);
+    if (isNaN(df1) || df1 < 1) { errEl.textContent = 'df must be a positive integer.'; errEl.style.display = 'block'; return; }
+  }
+  if (dist === 'f') {
+    const e1 = document.getElementById('df1'), e2 = document.getElementById('df2');
+    if (!e1 || !e2) return;
+    df1 = parseInt(e1.value); df2 = parseInt(e2.value);
+    if (isNaN(df1) || df1 < 1 || isNaN(df2) || df2 < 1) { errEl.textContent = 'Both df values must be positive integers.'; errEl.style.display = 'block'; return; }
+  }
+
+  const p = 1 - alpha;
+
+  let cv;
+  if (dist === 'z')         cv = normInv(p);
+  else if (dist === 't')    cv = df1 >= 1e6 ? normInv(p) : tInv(p, df1);
+  else if (dist === 'chi2') cv = chi2Inv(p, df1);
+  else if (dist === 'f')    cv = fInv(p, df1, df2);
+
+  const distNames = { z: 'Z', t: `t (df = ${df1})`, chi2: `χ² (df = ${df1})`, f: `F (df₁ = ${df1}, df₂ = ${df2})` };
+
+  document.getElementById('result-label').textContent = `Critical value · ${distNames[dist]}`;
+  document.getElementById('result-val').textContent   = cv.toFixed(4);
+
+  resBox.style.display = 'block';
+  requestAnimationFrame(() => resBox.classList.add('visible'));
+}
+
+// Init
+updateParams();
+</script>
+</body>
+</html>
